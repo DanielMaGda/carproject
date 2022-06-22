@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ts="http://www.szt3.project.pl"
+           targetNamespace="http://www.szt3.project.pl">
+
+    <xs:element name="GetCarByIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="carId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetCarByIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="carModel" type="ts:carModel"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CreateCarRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="carModel" type="ts:carModel"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CreateCarResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="carModel" type="ts:carModel"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UpdateCarRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="carModel" type="ts:carModel"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UpdateCarResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="carModel" type="ts:carModel"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DeleteCarRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="carId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DeleteCarResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="carModel" type="ts:carModel"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="carModel">
+        <xs:sequence>
+            <xs:element name="carId" type="xs:long"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="model" type="xs:string"/>
+            <xs:element name="seat" type="xs:long"/>
+            <xs:element name="door" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

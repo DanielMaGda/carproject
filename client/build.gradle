@@ -1,0 +1,48 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.0'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+configurations {
+    jaxb
+}
+
+group = 'com.carproject'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    jaxb(
+            'com.sun.xml.bind:jaxb-core:2.3.0.1',
+            'com.sun.xml.bind:jaxb-xjc:2.3.2',
+            'com.sun.xml.bind:jaxb-impl:2.3.2'
+    )
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+task generateJavaClasses {
+    System.setProperty('javax.xml.accessExternalSchema', 'all')
+    def jaxbTargetDir = file("src/main/java/")
+    doLast {
+        jaxbTargetDir.mkdirs()
+        ant.taskdef(
+                name: 'xjc',
+                classname: 'com.sun.tools.xjc.XJCTask',
+                classpath: configurations.jaxb.asPath
+        )
+        ant.jaxbTargetDir = jaxbTargetDir
+        ant.xjc(
+                destdir: '${jaxbTargetDir}',
+                schema: 'http://localhost:8082/ws/car.wsdl',
+                language: 'WSDL'
+        )
+    }
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
